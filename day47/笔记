@@ -1,0 +1,22 @@
+1.git和github介绍
+	git叫做版本控制软件，和maven相似，核心：版本控制软件
+	         没有git的时候，代码保存问题。
+ svn流程：A从项目经理那clone下来代码后写新功能，push回项目经理
+ 		可以回滚到任意位置。
+ 	缺点：同一个网络，必须要有网络。
+ git优点：无网络也可提交
+ 		无服务器的概念
+ 	            无网络：本地提交。 本地仓库
+		有网络：提交给服务器
+		pull：从服务器把代码弄到开发者
+github：类似于国外的csdn
+	          帮我们管理代码。本身是git仓库。
+2.git命令：
+	pwd：可以查看当前路径
+	cd f:可以切换盘符
+	git init:初始化
+	git add 文件夹名称：表示把该文件夹添加到git本地仓库去
+	git commit-m "":描述信息，必须加
+	git remote add origin https://github.com/Cxjfour/demo1.git
+		这是url地址的仓库，建立关系
+	git push-u origin master:把项目push到github上面
