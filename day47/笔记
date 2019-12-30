@@ -16,8 +16,31 @@ github：类似于国外的csdn
 	cd f:可以切换盘符
 	git init:初始化
 	git add 文件夹名称：表示把该文件夹添加到git本地仓库去
-	git commit-m "":描述信息，必须加
+	git commit -m "":描述信息，必须加
 	git remote add origin https://github.com/Cxjfour/demo1.git
 		这是url地址的仓库，建立关系
-	git push-u origin master:把项目push到github上面
-如何忽略文件：
+	git push-u origin master:提交代码到远程仓库，	
+	git pull:获取最新代码，更新（到公司的第一句代码）
+	git clone:第一次从远程仓库下载代码到本地电脑上面
+	git reset -hard：代码回滚，回滚到任意版本
+	如果要再次提交，只需要用给git add ady45 和git commit-m ""，和push就可以了
+	即使项目消失，网上也依旧会存在。
+	如何找回？ git clone 网址，就可以找回
+	如何回到之前的版本？git log
+		git reset -hard +标识符（见百度）
+    如何忽略文件：在项目内.gitignore内配置文件就可以了
+    	比如/bin/，/.settings/
+    	
+    	
+    	
+    	
+3.layui（多图片上传方便）
+	核心：在于模块化
+	步骤：导如
+	1.<link rel="stylesheet" href="${pageContext.request.contextPath }/layui/css/layui.css">
+	2.<script src="${pageContext.request.contextPath }/layui/layui.js"></script>
+	3.以及初始化layui.use('layer', function() {
+				var layer = layui.layer;
+				layer.msg('hello');
+			});
+	
