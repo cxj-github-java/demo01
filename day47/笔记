@@ -20,3 +20,4 @@ github：类似于国外的csdn
 	git remote add origin https://github.com/Cxjfour/demo1.git
 		这是url地址的仓库，建立关系
 	git push-u origin master:把项目push到github上面
+如何忽略文件：
