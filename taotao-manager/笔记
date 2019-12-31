@@ -1,0 +1,6 @@
+1.项目1：
+	先写后台页面。先创建一个manager的后台maven project的web项目。导入web-inf（web.xml）。导入pom文件(jar包)。
+	配置SqlMapConfig.xml。applicationContext.xml，db.properties，log4j.properties和springmvc.xml配置文件。
+	写三层目录(mapper,controller,service,bean)
+	用layui写页面的话，导入layui文件和jquery
+	
