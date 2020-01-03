@@ -125,7 +125,6 @@
 	<script src="${pageContext.request.contextPath }/layui/layui.js"></script>
 	<script
 		src="${pageContext.request.contextPath }/js/jquery-2.1.0.min.js"></script>
-
 	<script>
 		//JavaScript代码区域
 		layui.use('element', function() {
