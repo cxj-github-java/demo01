@@ -1,12 +1,13 @@
-package com.clive.bean;
+package com.clive.common;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Json {
+public class LayuiTableResult implements Serializable {
 	private int code;
 	private String msg;
 	private int count;
-	private List<TbItem> data;
+	private List<?> data;//这里是分页的对象，不写tbIrem对象，目的：因为该项目内需要json格式的有很多，所以用？来代表object
 	public int getCode() {
 		return code;
 	}
@@ -25,14 +26,16 @@ public class Json {
 	public void setCount(int count) {
 		this.count = count;
 	}
-	public List<TbItem> getData() {
+	public List<?> getData() {
 		return data;
 	}
-	public void setData(List<TbItem> data) {
+	public void setData(List<?> data) {
 		this.data = data;
 	}
 	@Override
 	public String toString() {
 		return "Json [code=" + code + ", msg=" + msg + ", count=" + count + ", data=" + data + "]";
 	}
+	
 }
+

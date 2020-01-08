@@ -3,4 +3,62 @@
 	配置SqlMapConfig.xml。applicationContext.xml，db.properties，log4j.properties和springmvc.xml配置文件。
 	写三层目录(mapper,controller,service,bean)
 	用layui写页面的话，导入layui文件和jquery
+2.项目二：
+	把数据库内的商品信息展示到页面上。用layui来做，需要传入json格式,jsp内不能有script代码，可以写入js内进行引用
+	/**
+				layui的核心思想是
+				当用户访问这个shoItem.jsp页面的时候  发现有一个table标签
+				这个table标签 又发现了一个 script方法 
+				这个script方法 里面有layui的render方法 实际上 做一个事情
+				当页面一旦被加载了以后 他会根据url去请求一个服务器地址 
+				从服务器地址上面 获取一段json格式数据 但是json格式的数据 他的格式 必须是这样的
+				{code:0,msg:"",count:10000,data:[{},{}]}
+				code:传入0就行了
+				msg:传入空字符串就行了
+				count:总记录条数就行了
+				data:每一页显示商品信息json格式  这就是 那十条记录信息
+			*/
+springmcv：
+	当路径为：Http://localhost:8080/item/showItem/1/10
+			那么对应的controller接受参数为：
+				@RequestMapping("/tbItem/show/{aa}/{limit}")
+				public void show(@PathVariable Integer aa,
+						@PathVariable Integer limit){}
+	如果路径为：Http://localhost:8080/item/showItem？page=1&limit=10;
+				@RequestMapping("/tbItem/show")
+				public void show( Integer page,Integer limit){
+				}
+json格式：
+	当我们在同一个项目中，有多个需求需要利用到json格式的时候。我们可以把data中的<>内的对象用"?"
+	来表示，private List<?> data;？代表new什么就是什么。
+补充标签：
+@Param("index") Integer index,@Param("pageSize") Integer pageSize)
+SELECT * FROM tbitem LIMIT #{index},#{pageSize}==SELECT * FROM tbitem LIMIT #{0},#{1}
+
+3.批量删除，上架和下架步骤：1.获取选中数据，
+				  2.写Ajax请求发送到服务器，
+				  3.服务器controller接受参数
+				  4.controller调用service
+	              5.service调用dao
+	              6.controller回传一个json告诉客户成功是否
+	封装工具类：返回数据（很多个实现需要返回失败或成功）
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
