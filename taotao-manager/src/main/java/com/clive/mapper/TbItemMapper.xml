@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 -->
 	 <update id="updateItemById">
 	 	<if test="type==0">
-	 		UPDATE tbitem SET status=0
+	 		UPDATE tbitem SET status=0,updated=#{date}
 	 		<where>
 				<foreach collection="ids" open="id in(" separator="," close=")" item="id">
 					#{id}
@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	 	</if>
 	 	<if test="type==1">
-	 		UPDATE tbitem SET status=1
+	 		UPDATE tbitem SET status=1,updated=#{date}
 	 		<where>
 				<foreach collection="ids" open="id in(" separator="," close=")" item="id">
 					#{id}
@@ -43,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	 	</if>
 	 	<if test="type==2">
-	 		UPDATE tbitem SET status=2
+	 		UPDATE tbitem SET status=2,updated=#{date}
 	 		<where>
 				<foreach collection="ids" open="id in(" separator="," close=")" item="id">
 					#{id}
@@ -53,12 +53,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 </update> 
 	
 	 <select id="searchTbItem" resultType="com.clive.bean.TbItem">
-	 	SELECT * FROM tbitem
-		<where>
-			<if test="title!= null and title!=''">
-				and title LIKE CONCAT('%', '${title}', '%')
-			</if>
-			<if test="price!=null and price==0">
+	 	SELECT * FROM tbitem  
+	 	<where>
+	 	<if test="price!=null and price==0">
 				and price BETWEEN 0 and 10000
 			</if>
 			<if test="price!=null and price==10000">
@@ -66,20 +63,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 			<if test="price!=null and price==50000">
 				and price >50000
-			</if>
-			<if test="sellPoint!=null and sellPoint!=''">
-				and sellPoint LIKE CONCAT('%', '${sellPoint}', '%')
-			</if>
+	 	</if> 
+		<if test="title!=''">
+			AND title LIKE '%${title}%'
+		</if>
+		<if test="cId!=null">
+			AND cId = #{cId}
+		</if>
 		</where>
-		limit #{i},#{limit}
+		LIMIT #{page},#{limit}
 	 </select>
 	 <select id="searchCount" resultType="Integer" >
-	 	SELECT count(*) FROM tbitem
-		<where>
-			<if test="title!= null and title!=''">
-				and title LIKE CONCAT('%', '${title}', '%')
-			</if>
-			<if test="price!=null and price==0">
+	 	SELECT COUNT(*) FROM tbitem 
+	 	<where>
+	 		<if test="price!=null and price==0">
 				and price BETWEEN 0 and 10000
 			</if>
 			<if test="price!=null and price==10000">
@@ -87,9 +84,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 			<if test="price!=null and price==50000">
 				and price >50000
+	 		</if> 
+			<if test="title!=''">
+				AND title LIKE '%${title}%'
 			</if>
-			<if test="sellPoint!=null and sellPoint!=''">
-				and sellPoint LIKE CONCAT('%', '${sellPoint}', '%')
+			<if test="cId!=null">
+				AND cId = #{cId}
 			</if>
 		</where>
 	 </select>

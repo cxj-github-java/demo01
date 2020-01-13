@@ -1,5 +1,6 @@
 package com.clive.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.clive.bean.TbItem;
@@ -33,14 +34,15 @@ public interface TbItemService {
 	 * msg;代表提示的页面信息
 	 * data：如果页面需要json格式的数据的话，data内就是这个对象
 	 */
-	TaotaoResult updateItem(List<TbItem> items, Integer type);
+	TaotaoResult updateItem(List<TbItem> items, Integer type,Date date);
 	/**
 	 * 搜索商品信息
 	 * @param tbItem
 	 * @return
 	 */
 	
-	LayuiTableResult searchTbItem(String title, Long price, String sellPoint, Integer page, Integer limit);
+	LayuiTableResult searchTbItem(String title, Long price, Long cId, Integer page, Integer limit);
+	
 	
 	
 }

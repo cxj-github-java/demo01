@@ -1,5 +1,6 @@
 package com.clive.mapper;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -15,8 +16,9 @@ public interface TbItemMapper {
 	Integer findAllCount();
 	//根据商品id删除商品信息，如果返回数据>0,删除成功，
 	//int deleteItemById(@Param("ids") List<Long> ids);
-	int updateItemById(@Param("ids") List<Long> ids,@Param("type") Integer type);
+	int updateItemById(@Param("ids") List<Long> ids,@Param("type") Integer type,@Param("date") Date date);
 	//搜索关键字
-	List<TbItem> searchTbItem(@Param("title") String title,@Param("price") Long price,@Param("sellPoint") String sellPoint,@Param("i") Integer i,@Param("limit") Integer limit);
-	Integer searchCount();
+	List<TbItem> searchTbItem(@Param("title") String title,@Param("price") Long price,@Param("cId") Long cId,@Param("page") Integer page,@Param("limit") Integer limit);
+	Integer searchCount(@Param("title")String title,@Param("price")Long price, @Param("cId")Long cId);
+	
 }

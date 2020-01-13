@@ -43,21 +43,91 @@ SELECT * FROM tbitem LIMIT #{index},#{pageSize}==SELECT * FROM tbitem LIMIT #{0}
 	              6.controller回传一个json告诉客户成功是否
 	封装工具类：返回数据（很多个实现需要返回失败或成功）
 	
+4.如何接收参数：
+	1.get传参，以“？”开头key对应value的形式传参
+			以Json格式传入参数
+			以url路径的形式传参
+	2.post传参，
+			以“？”开头key对应value的形式传参
+			以Json格式传入参数
+			以url路径的形式传参
+			
+示例1：<input text="" name="value"/>键值对形式
+	Controller内直接根据key取value
+	public void a(String value){
+				syso(value);
+				}
 	
+示例2：<a href="/controller/asd">点击后要跳转的地址，asd：程序员假定参数
+	直接把参数放到url地址上面去，无“？”直接放参数值，这是resf风格，前提：web.xml内配置拦截规则“/”结尾
+	接受参数前提：随便取个名字,用{}才会认为是参数
+	@RequestMapping("/controller/{suibian}/{x}")
+	public void a(@PathVariable String suibian,@PathVariable int x){
+				syso(suibian);
+				}
 	
+示例三：<input text="button" id="a" value="json格式"/>	
+	json格式一般用ajax请求，
+	<script >
+		$("#a").click(function(){
+			ajax请求	
+			$.ajax({
+				type:"post"//请求方式
+				url:服务器的url地址
+				contentType:表示传入数据为json格式
+				data:Json stringify{"name":"xxx"}//json数据格式
+				success:function(data){
+				
+				}
+			})
+		})
+	</script>
+如果发送的是json格式，那么必须有实体类bean，get，set，tostring方法，
+前提是必须导入jacksonjar包，
+	@RequestMapping("/controller")
+	public void a(@RequestBody Suibian suibian){
+				syso(suibian);
+				}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+5：数据的响应
+	1.把数据存入到ModelAanView中，页面通过jstl标签和el表达式来取数据
+	特点1：
+		@RequestMapping("/controller")
+		public String s(Model model){
+				model.addAttribute(){};//把数据存入三大域
+				//用这个方案的话，必须指定这个数据发送到哪个页面，让页面取接受
+				//springmvc return字符串的时候，没有@ResponseBody的时候
+				//它返回string表示跳转页面，问springmvc内前缀和后缀
+				return "index";//jsp/index.jsp
+	}
+	可以从浏览器上发起请求
+	2.@RequestMapping("/controller")
+	  @ResponseBody
+	  public Suibian s(Model model){
+	  	Suibian s = new Suibian();
+	  	s.setX("Y");
+	  //直接向浏览器输出aa这个字符串，特点：导入了jackson包后，我么输出一个对象，会变成json格式的对象输出到浏览器
+	  	return s;___json格式
+	  }
+	ajax核心思想：不会刷新页面，用Ajaxn请求，但参数是json格式，json格式必须有json的包装类
+				包装类接受参数，调用service，调用mapper，mapper返回了对象给service，
+				后到controller输出这个对象的json格式，由于是ajax请求，不刷新页面，数据页得到了。
+layui核心思想：自动发起ajax请求，并且传入参数为json格式，对象接受json格式的参数，然后返会参数，layui自己解析
+			出来，把数据绑定到页面
+
+6.多条件搜索
+	先要监听点击事件
+	获取输入框内容
+	需要树形结构
+	需要layui重绘
+	ajax请求
+	Java的sql语句
+		
+8.zTree树形结构介绍
+	异步加载：请求服务器地址，返回json数据，ztree去加载数据结构，会变成树结构。
+	因为有了id才能展开节点，必须有name，有了name才能显示节点名称
+	必须要有isParent true或者false
+	，因此，bean内要有这些数据。
 	
 	
 	

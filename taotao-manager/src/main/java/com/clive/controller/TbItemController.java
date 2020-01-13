@@ -1,6 +1,7 @@
 package com.clive.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,29 +41,29 @@ public class TbItemController {
 	@RequestMapping("/itemDelete")
 	@ResponseBody
 	public TaotaoResult deleteItemById(@RequestBody List<TbItem> items){
-		TaotaoResult updateItemById = tbItemService.updateItem(items,2);
+		Date date = new Date();
+		TaotaoResult updateItemById = tbItemService.updateItem(items,2,date);
 		return updateItemById;
 	}
 	@RequestMapping("/upItem")
 	@ResponseBody
 	public TaotaoResult upItem(@RequestBody List<TbItem> items){
-		TaotaoResult upItem = tbItemService.updateItem(items,1);
+		Date date = new Date();
+		TaotaoResult upItem = tbItemService.updateItem(items,1,date);
 		return upItem;
 	}
 	@RequestMapping("/downItem")
 	@ResponseBody
 	public TaotaoResult downItem(@RequestBody List<TbItem> items){
-		TaotaoResult upItem = tbItemService.updateItem(items,0);
+		Date date = new Date();
+		TaotaoResult upItem = tbItemService.updateItem(items,0,date);
 		return upItem;
 	}
 	@RequestMapping("/searchtbItem")
 	@ResponseBody
-	public LayuiTableResult searchTbItem(String title,Long price,String sellPoint,Integer page,Integer limit) throws Exception{
-		byte[] bytes = title.getBytes("iso-8859-1");
-		title = new String(bytes,"utf-8");
-		byte[] bytess = sellPoint.getBytes("iso-8859-1");
-		sellPoint = new String(bytess,"utf-8");
-		LayuiTableResult searchTbItem = tbItemService.searchTbItem(title,price,sellPoint,page, limit);
+	public LayuiTableResult searchTbItem(String title,Long price,Long cId,Integer page,Integer limit){
+
+		LayuiTableResult searchTbItem = tbItemService.searchTbItem(title,price,cId,page,limit);
 		return searchTbItem;
 	}
 }
