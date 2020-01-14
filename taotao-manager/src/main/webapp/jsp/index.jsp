@@ -186,7 +186,7 @@
 							</div>
 							<div class="layui-col-md6">
 								<div class="layui-card">
-									<div class="layui-card-header">商品分类统计</div>
+									<div class="layui-card-header">定位服务</div>
 									<div class="layui-card-body">
 										<div id="echartsMain2" style="width: 400px; height: 400px;"></div>
 									</div>
@@ -233,10 +233,10 @@
     		    ]
             });
         })
-   $.get('/itemCat/statisticsItem').done(function (resule) {
+   $.get('/jsp/map.jsp').done(function (resule) {
             myChart2.setOption({
             	title: {
-    		        text: '商品分类统计',
+    		        text: '地图定位',
     		        left: 'center'
     		    },
     		    tooltip: {
@@ -244,16 +244,20 @@
     		        formatter: '{a} <br/>{b} : {c} ({d}%)'
     		    },
     		    
-    		    series: [
-    		        {
-    		            type: 'pie',
-    		            radius: '65%',
-    		            center: ['50%', '50%'],
-    		            selectedMode: 'single',
-    		            data:resule
-    		            
-    		        }
-    		    ]
+    		    series: [{
+    	            type: 'lines',
+    	            coordinateSystem: 'bmap',
+    	            polyline: true,
+    	            data: busLines,
+    	            silent: true,
+    	            lineStyle: {
+    	                color: 'rgb(200, 35, 45)',
+    	                opacity: 0.2,
+    	                width: 1
+    	            },
+    	            progressiveThreshold: 500,
+    	            progressive: 200
+    	        }]
             });
         })
        

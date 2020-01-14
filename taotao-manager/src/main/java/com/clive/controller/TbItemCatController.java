@@ -28,12 +28,11 @@ public class TbItemCatController {
 		List<ZTreeNodeResult> result = tbItemCatService.findTbItemCatById(parentId);
 		return result;
 	}
-	@RequestMapping("/showZtree")
+	@RequestMapping("/statisticsItem")
 	@ResponseBody
 	public List<EchartsResult> showEcharts(){
-		List<EchartsResult> result = new ArrayList<EchartsResult>();
-		EchartsResult echart  = new EchartsResult();
 		
-		return null;
+		List<EchartsResult> result = tbItemCatService.showEcharts();
+		return result;
 	}
 }
